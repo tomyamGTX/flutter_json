@@ -46,4 +46,11 @@ class AyaProvider extends ChangeNotifier {
       log(json);
     }
   }
+
+  changePage() {
+    int no = int.parse(page);
+    no++;
+    page = '$no';
+    notifyListeners();
+  }
 }

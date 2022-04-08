@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_json/views/aya.page.dart';
-import 'package:flutter_json/views/slice.page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
