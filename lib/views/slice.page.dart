@@ -16,6 +16,7 @@ class _SlicePageState extends State<SlicePage> {
   String textDisplay = '';
   String textSlice = '';
   List<SliceIndex> slice = [];
+  final String page = '1';
 
   @override
   void initState() {
@@ -59,12 +60,14 @@ class _SlicePageState extends State<SlicePage> {
                     ElevatedButton(
                         onPressed: () => setState(() {
                               if (num < textSlice.characters.length - 1) {
-                                num++;
                                 slice.add(SliceIndex(
-                                  medinaMushafPageId: '',
+                                  medinaMushafPageId: page,
                                   index: '$num',
                                   text: textSlice.characters.elementAt(num),
                                 ));
+                                print(
+                                    "{ medina_mushaf_page_id : ${slice[num].medinaMushafPageId}, index: ${slice[num].index}, text : ${slice[num].text} }");
+                                num++;
                               }
                             }),
                         child: const Text('Next Slice'))
