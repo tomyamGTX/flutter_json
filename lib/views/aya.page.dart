@@ -14,6 +14,10 @@ class AyaPage extends StatefulWidget {
 class _AyaPageState extends State<AyaPage> {
   List jsonAyah = [];
 
+  final String _page = '1';
+
+  Object get page => _page;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,10 +39,11 @@ class _AyaPageState extends State<AyaPage> {
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
                     ///todo: display page 1 only
-                    if (jsonAyah[index].medinaMushafPageId == '1') {
+                    if (jsonAyah[index].medinaMushafPageId == page) {
                       return Text(
                         jsonAyah[index].text,
-                        style: const TextStyle(fontFamily: 'QuranIrab'),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontFamily: 'QuranIrab',fontSize: 20),
                         textDirection: TextDirection.rtl,
                       );
                     }
