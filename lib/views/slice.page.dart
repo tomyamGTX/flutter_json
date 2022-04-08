@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_json/providers/aya.providers.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +16,6 @@ class SlicePage extends StatefulWidget {
 }
 
 class _SlicePageState extends State<SlicePage> {
-  int num = 0;
-  String textDisplay = '';
-  String textSlice = '';
-  List<SliceIndex> slice = [];
-  final String page = '1';
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,56 +25,33 @@ class _SlicePageState extends State<SlicePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AyaProvider>(builder: (context, aya, child) {
-      if (aya.ayah.isNotEmpty) {
-        textDisplay = aya.ayah[1].text.trim().replaceAll('b', '');
-        textSlice = aya.ayah[1].text1.replaceAll('b', '').trim();
-      }
       return aya.ayah.isNotEmpty
           ? Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: Text(
-                    'index : ${num + 1}, text: ${textSlice.characters.elementAt(num)}'),
+                title: const Text('Create Json file'),
               ),
               body: Center(
                   child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
-                      textDisplay.characters.string,
+                      'Loading..',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontFamily: 'QuranIrab', fontSize: 20),
+                      style: TextStyle(fontFamily: 'QuranIrab', fontSize: 20),
                       textDirection: TextDirection.rtl,
                     ),
-                    Text(
-                      textSlice.characters.elementAt(num),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontFamily: 'QuranIrab', fontSize: 20),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    ElevatedButton(
-                        onPressed: () => setState(() {
-                              if (num < textSlice.characters.length - 1) {
-                                slice.add(SliceIndex(
-                                  medinaMushafPageId: page,
-                                  index: '$num',
-                                  text: textSlice.characters.elementAt(num),
-                                ));
-                                print(
-                                    "{ medina_mushaf_page_id : ${slice[num].medinaMushafPageId}, index: ${slice[num].index}, text : ${slice[num].text} }");
-                                num++;
-                              }
-                            }),
-                        child: const Text('Next Slice'))
                   ],
                 ),
               )))
-          : Container(
-              color: Colors.white,
-              child: const Center(child: Text('No Data ...')));
+          : Scaffold(
+              body: Container(
+                  color: Colors.white,
+                  child: const Center(
+                      child:
+                          Text('No Data. Please parse the json file first'))),
+            );
     });
   }
 }

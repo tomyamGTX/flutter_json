@@ -21,10 +21,6 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const AyaPage())),
               child: const Text('Parse Json')),
-          ElevatedButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SlicePage())),
-              child: const Text('Slice Index Json')),
         ],
       ),
     ));
