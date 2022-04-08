@@ -29,8 +29,29 @@ class _AyaPageState extends State<AyaPage> {
         ? Consumer<AyaProvider>(builder: (context, aya, child) {
             return Scaffold(
               appBar: AppBar(
-                centerTitle: true,
-                title: Text('Load json data for page ${aya.page}'),
+                actions: [
+                  TextButton(
+                      onPressed: int.parse(aya.page) > 0
+                          ? () =>
+                              Provider.of<AyaProvider>(context, listen: false)
+                                  .prevPage()
+                          : null,
+                      child: const Text(
+                        "Prev",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                  TextButton(
+                      onPressed: int.parse(aya.page) < 604
+                          ? () =>
+                              Provider.of<AyaProvider>(context, listen: false)
+                                  .nextPage()
+                          : null,
+                      child: const Text(
+                        "Next",
+                        style: TextStyle(color: Colors.white),
+                      ))
+                ],
+                title: Text('Ayah Page ${aya.page}'),
               ),
               body: Center(
                   child: Padding(
@@ -57,19 +78,17 @@ class _AyaPageState extends State<AyaPage> {
                               return Container();
                             }),
                       ),
-                      ElevatedButton(
-                          onPressed: () =>
-                              Provider.of<AyaProvider>(context, listen: false)
-                                  .generateJsonData(),
-                          child: const Text('Create json data')),
                     ],
                   ),
                 ),
               )),
-              floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.navigate_next),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
+              floatingActionButton: FloatingActionButton.extended(
                 onPressed: () =>
-                    Provider.of<AyaProvider>(context, listen: false).changePage(),
+                    Provider.of<AyaProvider>(context, listen: false)
+                        .generateJsonData(),
+                label: const Text('Create json data per page'),
               ),
             );
           })
