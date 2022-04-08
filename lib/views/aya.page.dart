@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_json/models/aya.model.dart';
+import 'package:flutter_json/providers/aya.providers.dart';
+import 'package:provider/provider.dart';
 
 class AyaPage extends StatefulWidget {
   const AyaPage({Key? key}) : super(key: key);
@@ -43,7 +45,8 @@ class _AyaPageState extends State<AyaPage> {
                       return Text(
                         jsonAyah[index].text,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(fontFamily: 'QuranIrab',fontSize: 20),
+                        style: const TextStyle(
+                            fontFamily: 'QuranIrab', fontSize: 20),
                         textDirection: TextDirection.rtl,
                       );
                     }
@@ -63,6 +66,7 @@ class _AyaPageState extends State<AyaPage> {
     setState(() {
       jsonAyah =
           ayahData.entries.map((e) => JsonAyah.fromJson(e.value)).toList();
+      Provider.of<AyaProvider>(context,listen: false).getAllAyah(jsonAyah);
     });
   }
 }
