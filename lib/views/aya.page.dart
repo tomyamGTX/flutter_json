@@ -34,11 +34,15 @@ class _AyaPageState extends State<AyaPage> {
               child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text(
-                      jsonAyah[index].text,
-                      style: const TextStyle(fontFamily: 'QuranIrab'),
-                      textDirection: TextDirection.rtl,
-                    );
+                    ///todo: display page 1 only
+                    if (jsonAyah[index].medinaMushafPageId == '1') {
+                      return Text(
+                        jsonAyah[index].text,
+                        style: const TextStyle(fontFamily: 'QuranIrab'),
+                        textDirection: TextDirection.rtl,
+                      );
+                    }
+                    return Container();
                   }),
             )),
           )
